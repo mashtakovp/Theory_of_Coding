@@ -17,6 +17,7 @@ print(f"H:\n{H}")
 # 2.3
 errors = np.eye(len(H), dtype=int)
 syndromes = {tuple(err @ H): err.tolist() for err in errors}
+
 print(f"Table of syndromes:\n{syndromes}")
 # 2.4
 word = np.array([1, 0, 1, 0])
