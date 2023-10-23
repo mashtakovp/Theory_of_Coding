@@ -56,7 +56,6 @@ def right_word1(H, syndrome1, word1error):
 word1error = create_errors(word, G, 1)
 syndrome1 = word1error@H%2
 right_word1(H, syndrome1, word1error)
-#word1error@H%2
 print("")
 def right_word2(H, syndrome2, word2error):
     k = -1
@@ -108,7 +107,7 @@ def right_word3(H, syndrome3, word3error):
         if k >= 0:
             break
     if k == -1:
-        print("Такого синдрома нет в матрице синдромов", '\n')
+        print("Такого синдрома нет в матрице синдромов")
     else:
         word3error[k] ^= 1
         if d != -1:
@@ -117,12 +116,58 @@ def right_word3(H, syndrome3, word3error):
             word3error[g] ^= 1
     print(f"Слово: {word3error} после исправления")
     return 0
-
 word3error = create_errors(word, G, 3)
 syndrome3 = word3error@H%2
 right_word3(H, syndrome3, word3error)
-
-
+print("")
+def right_word4(H, syndrome4, word4error):
+    k = -1
+    d = -1
+    g = -1
+    z = -1
+    for i in range(len(H)):
+        if np.array_equal(syndrome4, H[i]):
+            k = i
+            break
+        for j in range(i + 1, len(H)):
+            if np.array_equal(syndrome4, H[i] + H[j]):
+                k = i
+                d = j
+                break
+            for e in range(j + 1, len(H)):
+                if np.array_equal(syndrome4, H[i] + H[j] + H[e]):
+                    k = i
+                    d = j
+                    g = e
+                    break
+                for y in range(e + 1, len(H)):
+                    if np.array_equal(syndrome4, H[i] + H[j] + H[e] + H[y]):
+                        k = i
+                        d = j
+                        g = e
+                        z = y
+                        break
+                if k >= 0:
+                    break
+            if k >= 0:
+                break
+        if k >= 0:
+            break
+    if k == -1:
+        print("Такого синдрома нет в матрице синдромов", '\n')
+    else:
+        word4error[k] ^= 1
+        if d != -1:
+            word4error[d] ^= 1
+        if g != -1:
+            word4error[g] ^= 1
+        if z != -1:
+            word4error[z] ^= 1
+    print(f"Слово: {word4error} после исправления")
+    return 0
+word4error = create_errors(word, G, 4)
+syndrome4 = word4error@H%2
+right_word3(H, syndrome4, word4error)
 
 
 """
