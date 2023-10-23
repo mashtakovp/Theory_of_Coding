@@ -24,7 +24,7 @@ def G_H(B):
     return G, H
 
 G, H = G_H(B)
-#print(f"G:\n{G}\nH:\n{H}")
+print(f"G:\n{G}\nH:\n{H}")
 
 #4.2 Провести исследование расширенного кода Голея для одно-, двух-,трёх- и четырёхкратных ошибок.
 word = np.array([i % 2 for i in range(len(G))])
@@ -107,7 +107,7 @@ def right_word3(H, syndrome3, word3error):
         if k >= 0:
             break
     if k == -1:
-        print("Такого синдрома нет в матрице синдромов")
+        print("Синдрома нет в таблице")
     else:
         word3error[k] ^= 1
         if d != -1:
@@ -154,7 +154,7 @@ def right_word4(H, syndrome4, word4error):
         if k >= 0:
             break
     if k == -1:
-        print("Такого синдрома нет в матрице синдромов", '\n')
+        print("Синдрома нет в таблице", '\n')
     else:
         word4error[k] ^= 1
         if d != -1:
@@ -168,12 +168,11 @@ def right_word4(H, syndrome4, word4error):
 word4error = create_errors(word, G, 4)
 syndrome4 = word4error@H%2
 right_word3(H, syndrome4, word4error)
+print("")
+
+#4.3 Написать функцию формирования порождающей и проверочных матриц кода Рида-Маллера RM(r, m) на основе параметров r и m.
+
 
 
 """
-word2error = create_errors(word, G, 2)
-syndrome2 = word2error@H%2
-word3error = create_errors(word, G, 3)
-syndrome3 = word3error@H%2
 """
-
